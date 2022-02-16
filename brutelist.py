@@ -2,6 +2,7 @@
 
 import argparse
 import itertools
+import os
 import sys
 from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 
@@ -108,13 +109,36 @@ options:
         except Exception as e:
             sys.exit(e)
 
+    def makeFileIfNotExist(self):
+        if not(str(self.filename) in os.listdir(os.getcwd())):
+            with open(os.path.join(os.getcwd(), self.filename), "w", encoding="utf-8") as fmake:
+                fmake.write("\n")
+        return
+
+    def saveToFile(self):
+        if not(self.filename is None):
+            self.makeFileIfNotExist()
+            with open(os.path.join(os.getcwd(), self.filename), "a", encoding="utf-8") as fapnd:
+                for line in self.PASSWORD:
+                    fapnd.write(line + "\n")
+
+    def displayPasswords(self):
+        for password in self.PASSWORD:
+            print(password)
+
+    def startOutput(self):
+        if not(self.filename is None):
+            self.saveToFile()
+
+        if not(self.verbose == False):
+            self.displayPasswords()
+
     def run(self):
         self.getArgs()
         self.parseArgs()
         self.generateCharacterSet()
         self.generateList()
-        print(self.PASSWORD)
-        print(len(self.PASSWORD))
+        self.startOutput()
 
 
 x = BruteList()
