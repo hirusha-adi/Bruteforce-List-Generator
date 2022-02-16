@@ -8,7 +8,16 @@ from string import ascii_lowercase, ascii_uppercase, digits, punctuation
 
 
 class BruteList:
-    def __init__(self):
+    def __init__(self,
+                 inluce_int: bool = None,
+                 include_alphabet: bool = None,
+                 include_ALPHABET: bool = None,
+                 include_punctuation: bool = None,
+                 verbose: bool = None,
+                 filename: str = None,
+                 length: int = None
+                 ):
+
         self.__HELP__ = r"""usage: brutelist [-h] [-i] [-a] [-A] [-p] [-v] [-f FILE] [-l LENGTH]
 
 options:
@@ -24,13 +33,13 @@ options:
 
         self.PASSWORD = []
         self.CHARACTERS = ""
-        self.inluce_int = None
-        self.include_alphabet = None
-        self.include_ALPHABET = None
-        self.include_punctuation = None
-        self.verbose = None
-        self.filename = None
-        self.length = None
+        self.inluce_int = inluce_int
+        self.include_alphabet = include_alphabet
+        self.include_ALPHABET = include_ALPHABET
+        self.include_punctuation = include_punctuation
+        self.verbose = verbose
+        self.filename = filename
+        self.length = length
 
     def getArgs(self):
         parser = argparse.ArgumentParser()
@@ -133,7 +142,7 @@ options:
         if not(self.verbose == False):
             self.displayPasswords()
 
-    def run(self):
+    def runStandalone(self):
         self.getArgs()
         self.parseArgs()
         self.generateCharacterSet()
@@ -141,5 +150,6 @@ options:
         self.startOutput()
 
 
-x = BruteList()
-x.run()
+if __name__ == "__main__":
+    obj = BruteList()
+    obj.runStandalone()
