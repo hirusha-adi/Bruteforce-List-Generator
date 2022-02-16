@@ -111,6 +111,7 @@ options:
     def run(self):
         self.getArgs()
         self.parseArgs()
+        self.generateCharacterSet()
         self.generateList()
         print(self.PASSWORD)
         print(len(self.PASSWORD))
