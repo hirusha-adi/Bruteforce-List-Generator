@@ -41,7 +41,32 @@ options:
         self.filename = filename
         self.length = length
 
-    def getArgs(self):
+    # Setters and Getters
+    def includeNumbers(self, value: bool):
+        self.inluce_int = value
+
+    def includeLettersLowercase(self, value: bool):
+        self.include_alphabet = value
+
+    def includeLettersUppercase(self, value: bool):
+        self.include_ALPHABET = value
+
+    def includeSpecialCharacters(self, value: bool):
+        self.include_punctuation = value
+
+    def includePuntuation(self, value: bool):
+        self.include_punctuation = value
+
+    def outputPrint(self, value: bool):
+        self.verbose = value
+
+    def outputFile(self, filename):
+        self.filename = filename
+
+    def setLength(self, value: int):
+        self.length = value
+
+    def _getArgs(self):
         parser = argparse.ArgumentParser()
 
         # What to include
@@ -82,7 +107,7 @@ options:
         # Length
         self.length = args.length
 
-    def parseArgs(self):
+    def _parseArgs(self):
         # Length check
         if self.length is None:
             print("\nerror: password length is not mentioned")
@@ -143,8 +168,8 @@ options:
             self.displayPasswords()
 
     def runStandalone(self):
-        self.getArgs()
-        self.parseArgs()
+        self._getArgs()
+        self._parseArgs()
         self.generateCharacterSet()
         self.generateList()
         self.startOutput()
